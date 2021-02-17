@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+void function(char abc[100]);//function protothype
+int main()
+{
+//char ch[100]="Garbage$Welcome $to LTTS;ignore";
+FILE *fptr;
+char ch[100];
+fptr=fopen("text.txt","r");
+fgets(ch,100,fptr);
+puts(ch);
+function(ch); //funtion call
+return 0;
+}
+
+void function(char abc[100])   //function defination
+{
+int i,j=0,count=0,k=0;
+int temp,temp1;
+int count1=0;
+char xyz[100];
+int n=strlen(abc);
+//printf("%s",abc);
+
+for(i=0;i<n;i++)
+{
+temp=i;
+
+
+if(abc[i]=='$')
+{
+temp=i;
+count=i;
+while(abc[temp]!=';')
+{
+
+if(abc[temp]=='$')
+{
+count1=0;
+}
+
+count1++;
+
+
+temp++;
+
+
+
+}
+}
+
+}
+temp=count+count1;
+
+
+for(j=0;j<temp;j++)
+{
+if(j>count)
+{
+xyz[k]=abc[j];
+k++;
+}
+}
+printf("\n %s",xyz);
+}
