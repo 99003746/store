@@ -20,9 +20,12 @@ int pal_indrome(int n)
     // palindrome if orignalN and reversedN are equal
 
     if (original == rev)
-        printf("%d is a palindrome.", original);
+       printf("\n %d is a palindrome", original);
+        
     else
-        printf("%d is not a palindrome.", original);
+        printf("\n %d is not a palindrome", original);
+       
 
     return 0;
 }
+
