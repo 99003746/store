@@ -1,0 +1,150 @@
+#include<stdio.h>
+
+// This is MCU Specific Header file
+
+// general macros
+#define __VO volatile
+#define RCC  (RCC_RegDef_t*) 0x40023800
+//Macros for different memories
+
+#define SRAM1  0x20000000UL
+#define SRAM2  0x2001C000UL
+#define FLASH  0x08000000UL
+#define ROM    0x1FFF0000UL
+
+
+//Macros for bus system
+
+#define  BUS_BASE_ADDR   0x40000000UL
+#define  APB1_BASE_ADDR  0x40000000UL
+#define  APB2_BASE_ADDR  0x40010000UL
+#define  AHB1_BASE_ADDR  0x40020000UL
+#define  AHB2_BASE_ADDR  0x50000000UL
+
+// Macros for GPIO
+
+#define GPIOA_BASEADDR   (AHB1_BASE_ADDR + 0x0000)
+#define GPIOB_BASEADDR   (AHB1_BASE_ADDR + 0x0400)
+#define GPIOC_BASEADDR   (AHB1_BASE_ADDR + 0x0800)
+#define GPIOD_BASEADDR   (AHB1_BASE_ADDR + 0x0C00)
+#define GPIOE_BASEADDR   (AHB1_BASE_ADDR + 0x1000)
+#define GPIOF_BASEADDR   (AHB1_BASE_ADDR + 0x1400)
+#define GPIOG_BASEADDR   (AHB1_BASE_ADDR + 0x1800)
+#define GPIOH_BASEADDR   (AHB1_BASE_ADDR + 0x1C00)
+#define GPIOI_BASEADDR   (AHB1_BASE_ADDR + 0x2000)
+#define GPIOJ_BASEADDR   (AHB1_BASE_ADDR + 0x2400)
+#define GPIOK_BASEADDR   (AHB1_BASE_ADDR + 0x2800)
+
+
+//Macros for peripherals hanging onto APB1 bus
+
+#define TIM2_BASE_ADDR (APB1_BASE_ADDR+0x00)
+#define TIM3_BASE_ADDR (APB1_BASE_ADDR+0x0400)
+#define TIM4_BASE_ADDR (APB1_BASE_ADDR+0x0800)
+#define TIM5_BASE_ADDR (APB1_BASE_ADDR+0x0C00)
+#define TIM6_BASE_ADDR (APB1_BASE_ADDR+0x1000)
+#define TIM7_BASE_ADDR (APB1_BASE_ADDR+0x1400)
+#define TIM12_BASE_ADDR (APB1_BASE_ADDR+0x1800)
+#define TIM13_BASE_ADDR (APB1_BASE_ADDR+0x1c00)
+#define TIM14_BASE_ADDR (APB1_BASE_ADDR+0x2000)
+
+#define DAC_BASE_ADDR (APB1_BASE ADDR + 0x7400)
+#define PWR_BASE_ADDR (APB1_BASE_ADDR + 0x7000)
+#define CAN2_BASE_ADDR (APB1_BASE_ADDR + 0x6800)
+#define CAN1_BASE_ADDR (APB1_BASE_ADDR + 0x6400)
+#define I2C3_BASE_ADDR (APB1_BASE_ADDR + 0x5C00)
+#define I2C2_BASE_ADDR (APB1_BASE_ADDR + 0x5800)
+#define I2C1_BASE_ADDR (APB1_BASE_ADDR + 0x5400)
+#define UART5_BASE_ADDR (APB1_BASE_ADDR + 0x5000)
+#define UART4_BASE_ADDR (APB1_BASE_ADDR + 0x4C00)
+#define USART3_BASE_ADDR (APB1_BASE_ADDR + 0x4800)
+#define USART2_BASE_ADDR (APB1_BASE_ADDR + 0x4400)
+#define USART8_BASE_ADDR (APB1_BASE_ADDR + 0x7C00)
+#define USART7_BASE_ADDR (APB1_BASE_ADDR + 0x7800)
+
+#define USART7_BASE_ADDR (APB1_BASE_ADDR + 0x7800)
+#define I2S3ext_BASE_ADDR (APB1_BASE_ADDR + 0x4000)
+#define SPI3_I2S3_BASE_ADDR (APB1_BASE_ADDR + 0x3C00)
+#define SPI2_I2S2_BASE_ADDR (APB1_BASE_ADDR + 0x3800)
+#define IWDG_BASE_ADDR (APB1_BASE_ADDR + 0x3000)
+#define WWDG_BASE_ADDR (APB1_BASE_ADDR + 0x2C00)
+#define RTC_BKP_Registerst_BASE_ADDR (APB1_BASE_ADDR + 0x2800)
+
+//Macros for peripherals hanging onto APB2 bus
+
+#define TIM1_BASE_ADDR        (APB2_BASE_ADDR + 0x0000)
+#define TIM8_BASE_ADDR        (APB2_BASE_ADDR + 0x0400)
+#define USART1_BASE_ADDR    (APB2_BASE_ADDR + 0x1000)
+#define USART6_BASE_ADDR    (APB2_BASE_ADDR + 0x1400)
+#define ADC_BASE_ADDR        (APB2_BASE_ADDR + 0x2000)
+#define SDIO_BASE_ADDR        (APB2_BASE_ADDR + 0x2C00)
+#define SPI1_BASE_ADDR        (APB2_BASE_ADDR + 0x3000)
+#define SPI4_BASE_ADDR        (APB2_BASE_ADDR + 0x3400)
+#define SYSCFG_BASE_ADDR    (APB2_BASE_ADDR + 0x3800)
+#define EXTI_BASE_ADDR        (APB2_BASE_ADDR + 0x3C00)
+#define TIM9_BASE_ADDR        (APB2_BASE_ADDR + 0x4000)
+#define TIM10_BASE_ADDR        (APB2_BASE_ADDR + 0x4400)
+#define TIME11_BASE_ADDR    (APB2_BASE_ADDR + 0x4800)
+#define SPI5_BASE_ADDR        (APB2_BASE_ADDR + 0x5000)
+#define SPI6_BASE_ADDR        (APB2_BASE_ADDR + 0x5400)
+#define SAI1_BASE_ADDR        (APB2_BASE_ADDR + 0x5800)
+#define LCD-TFT_BASE_ADDR    (APB2_BASE_ADDR + 0x6800)
+
+//GPIO Register definitions
+
+typedef struct
+{
+  __VO uint32_t  MODER;       //+00 offset
+  __VO uint32_t OTYPER;       //+04 offset
+  __VO uint32_t OSPEEDR;      //+08 offset
+  __VO uint32_t PUPDR;        //+0c offset
+  __VO uint32_t	IDR;          //+10 offset
+  __VO uint32_t	ODR;          //+14 offset
+  __VO uint32_t	BSRR;         //+18 offset
+  __VO uint32_t	LCKR;         //+1C offset
+  __VO uint32_t AFR[2];       //+20 offset
+
+}GPIO_RegDef;
+
+
+typedef struct{
+
+
+	__VO uint32_t CR;
+	__VO uint32_t PLLCFGR;
+	__VO uint32_t CFGR;
+	__VO uint32_t CIR;
+	__VO uint32_t AHB1RSTR[3];
+	__VO uint32_t APB1RSTR[2];
+	__VO uint32_t AHB1ENR[3];
+	__VO uint32_t APB1ENR[2];
+	__VO uint32_t AHB1LPENR[3];
+	__VO uint32_t APB1LPENR[2];
+	__VO uint32_t BDCR;
+	__VO uint32_t CSR;
+	__VO uint32_t SSCGR;
+	__VO uint32_t PLLI2SCFGR;
+
+}RCC_RegDef;
+
+//macros for GPIO pointed structure
+
+#define GPIOA (GPIO_RegDef_t*)GPIOA_BASEADDR
+//Todo
+
+      //macros for enabling clock for GPIO's
+
+#define GPIOA_PCLOCK_ENABLE (RCC->AHB1ENR=(1<<0))
+
+// Todo
+
+//macros for disable clock for GPIO's
+
+#define GPIOA_PCLOCK_DISABLE (RCC->AHB1ENR=~(1<<0))
+
+
+
+
+
+
+
