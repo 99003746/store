@@ -4,10 +4,6 @@ path ="Datasheet_3.xlsx"
 wb = load_workbook(path)
 
 
-
-
-
-
 #Function for Name
 data=[]
 def name():
@@ -22,6 +18,9 @@ def name():
             data.append(ws.cell(row=i,column=3).value)
 
     print(data)
+    b = (len(data))
+    if b == 0:
+        print('Given Name is not present in the list')
     exit()
 #Function for PS NUmber
 
@@ -83,7 +82,9 @@ def all():
                             for j in range(4, 11):
                                 data.append(sheet.cell(row=i, column=j).value)
     print(data)
-    print(len(data))
+    a=(len(data))
+    if a==0:
+        print('Given Data is Incoorect')
     return(data)
 
 
@@ -107,11 +108,11 @@ else:
 
 if 'Master_Sheet' not in wb.sheetnames:
     head=[]
-    head= ['Name','PS_No','Email','a1','a2','a3','a4','a5','a6','a7',\
-           'b1', 'b2', 'b3','b4','b5','b6','b7',\
-           'c1','c2', 'c3','c4','c5','c6','c7',\
-           'd1','d2','d3','d4','d5','d6','d7',\
-           'e1','e2','e3','e4','e5','e6','e7']
+    head= ['Name','Psno','email','Contact_No','Blood_Group','Adhaar','Gender','Age','Height','Weight',\
+           'SEM-1 (ELECTRONICS)', 'SEM-1 (MATHS)', 'SEM-1 (BIOLOGY)','SEM-1 (GIOLOGY)','SEM-1 (AGRICULTURE)','SEM-1 (PHYSICS)','SEM-1 (CHEMISTRY)',\
+           'SEM-2 (ELECTRONICS)', 'SEM-2 (MATHS)', 'SEM-2 (BIOLOGY)','SEM-2 (GIOLOGY)','SEM-2 (AGRICULTURE)','SEM-2 (PHYSICS)','SEM-2 (CHEMISTRY)',\
+           'SEM-3 (ELECTRONICS)', 'SEM-3 (MATHS)', 'SEM-3 (BIOLOGY)','SEM-3 (GIOLOGY)','SEM-3 (AGRICULTURE)','SEM-3 (PHYSICS)','SEM-3 (CHEMISTRY)',\
+           'SEM-4 (ELECTRONICS)', 'SEM-4 (MATHS)', 'SEM-4 (BIOLOGY)','SEM-4 (GIOLOGY)','SEM-4 (AGRICULTURE)','SEM-4 (PHYSICS)','SEM-4 (CHEMISTRY)']
 
     ws = wb.create_sheet('Master_Sheet')
     print("CREATING Master_Sheet")
@@ -143,8 +144,8 @@ else:
     ##Creating Chart
 
 sheet = wb['Master_Sheet']
-values = Reference(sheet, min_col=3, min_row=2,
-                   max_col=10, max_row=4)
+values = Reference(sheet, min_col=11, min_row=2,
+                   max_col=28, max_row=4)
 
 chart = BarChart()
 
@@ -155,10 +156,10 @@ chart.add_data(values)
 chart.title = " STUDENT CHART "
 
 # set the title of the x-axis
-chart.x_axis.title = " X_AXIS "
+chart.x_axis.title = " LIST OF STUDENTS "
 
 # set the title of the y-axis
-chart.y_axis.title = " Y_AXIS "
+chart.y_axis.title = " EFFICIENCY "
 
 # add chart to the sheet
 # the top-left corner of a chart
