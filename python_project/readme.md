@@ -5,8 +5,10 @@ wb = load_workbook(path)
 
 
 #Function for Name
+
 data=[]
 def name():
+    data = []
     ws=wb['Sheet1']
     data = []
     name = input("Enter a Name:- ")
@@ -21,7 +23,9 @@ def name():
     b = (len(data))
     if b == 0:
         print('Given Name is not present in the list')
-    exit()
+    data = all()
+    return data
+
 #Function for PS NUmber
 
 def ps_no():
@@ -35,7 +39,8 @@ def ps_no():
             data.append(ws.cell(row=i, column=1).value)
             data.append(ws.cell(row=i, column=3).value)
     print(data)
-    exit()
+    data = all()
+    return data
 
 #Function for Email
 
@@ -50,7 +55,8 @@ def email():
             data.append(ws.cell(row=i, column=1).value)
             data.append(ws.cell(row=i, column=2).value)
     print(data)
-    exit()
+    data = all()
+    return data
 
 #Function for ALL
 
@@ -93,13 +99,13 @@ def all():
 n=int(input("Which Data You have \n 1.Name \n 2.Ps number \n 3.Email \n 4.All \n"))
 
 if n==1:
-    name()
+    data = name()
 elif n==2:
-    ps_no()
+    data = ps_no()
 elif n==3:
-    email()
+    data = email()
 elif n==4:
-     data= all()
+    data = all()
 else:
     print('Data unavailable')
 
@@ -107,24 +113,28 @@ else:
 ##Creating Master Sheet
 
 if 'Master_Sheet' not in wb.sheetnames:
-    head=[]
-    head= ['Name','Psno','email','Contact_No','Blood_Group','Adhaar','Gender','Age','Height','Weight',\
-           'SEM-1 (ELECTRONICS)', 'SEM-1 (MATHS)', 'SEM-1 (BIOLOGY)','SEM-1 (GIOLOGY)','SEM-1 (AGRICULTURE)','SEM-1 (PHYSICS)','SEM-1 (CHEMISTRY)',\
-           'SEM-2 (ELECTRONICS)', 'SEM-2 (MATHS)', 'SEM-2 (BIOLOGY)','SEM-2 (GIOLOGY)','SEM-2 (AGRICULTURE)','SEM-2 (PHYSICS)','SEM-2 (CHEMISTRY)',\
-           'SEM-3 (ELECTRONICS)', 'SEM-3 (MATHS)', 'SEM-3 (BIOLOGY)','SEM-3 (GIOLOGY)','SEM-3 (AGRICULTURE)','SEM-3 (PHYSICS)','SEM-3 (CHEMISTRY)',\
-           'SEM-4 (ELECTRONICS)', 'SEM-4 (MATHS)', 'SEM-4 (BIOLOGY)','SEM-4 (GIOLOGY)','SEM-4 (AGRICULTURE)','SEM-4 (PHYSICS)','SEM-4 (CHEMISTRY)']
+
+    Header=[]
+    for sheet in wb.worksheets:
+        i=1
+        if sheet==wb['Sheet1']:
+            for j in range(1, 11):
+                Header.append(sheet.cell(row=i,column=j).value)
+        else:
+            for j in range(4, 11):
+                Header.append(sheet.cell(row=i, column=j).value)
 
     ws = wb.create_sheet('Master_Sheet')
-    print("CREATING Master_Sheet")
+    print("CREATED Master_Sheet")
     s=ws.max_row          # variable to store max rows for sl num
 
     for i in range(1,39):
 
-        ws.cell(row=1,column=i).value=head[i-1]
+        ws.cell(row=1,column=i).value=Header[i-1]
     print("Data", len(data))
     for i in range(1,39):
 
-        ws.cell(row=s+1,column=i).value=data[i-1]
+        ws.cell(row=s+1,column=i).value=d bata[i-1]
 
     wb.save(path)
 
@@ -142,7 +152,7 @@ else:
 
 
     ##Creating Chart
-
+'''
 sheet = wb['Master_Sheet']
 values = Reference(sheet, min_col=11, min_row=2,
                    max_col=28, max_row=4)
@@ -170,3 +180,4 @@ sheet.add_chart(chart, "E2")
 wb.save("Datasheet_3.xlsx")
 
 
+'''
