@@ -1,12 +1,16 @@
 from openpyxl import load_workbook
-from openpyxl.chart import BarChart, Reference
+from openpyxl.chart import BarChart3D, Reference
+from openpyxl.chart import BarChart, Series, Reference
 path ="Datasheet_3.xlsx"
 wb = load_workbook(path)
 
 
 #Function for Name
 
+
+
 data=[]
+
 def name():
     data = []
     ws=wb['Sheet1']
@@ -26,6 +30,7 @@ def name():
     data = all()
     return data
 
+
 #Function for PS NUmber
 
 def ps_no():
@@ -42,6 +47,7 @@ def ps_no():
     data = all()
     return data
 
+
 #Function for Email
 
 def email():
@@ -57,6 +63,8 @@ def email():
     print(data)
     data = all()
     return data
+
+
 
 #Function for ALL
 
@@ -94,7 +102,11 @@ def all():
     return(data)
 
 
+
 #User Input
+
+
+
 
 n=int(input("Which Data You have \n 1.Name \n 2.Ps number \n 3.Email \n 4.All \n"))
 
@@ -134,7 +146,7 @@ if 'Master_Sheet' not in wb.sheetnames:
     print("Data", len(data))
     for i in range(1,39):
 
-        ws.cell(row=s+1,column=i).value=d bata[i-1]
+        ws.cell(row=s+1,column=i).value=data[i-1]
 
     wb.save(path)
 
@@ -152,32 +164,34 @@ else:
 
 
     ##Creating Chart
-'''
+
 sheet = wb['Master_Sheet']
+# for i in range(10):
+#     sheet.append([i])
+
 values = Reference(sheet, min_col=11, min_row=2,
-                   max_col=28, max_row=4)
+                   max_col=38, max_row= sheet.max_row)
 
+# Create object of BarChart3D class
 chart = BarChart()
-
-# adding data to the Bar chart object
+chart.style = 15
 chart.add_data(values)
 
 # set the title of the chart
-chart.title = " STUDENT CHART "
+chart.title = " BarChart "
 
 # set the title of the x-axis
-chart.x_axis.title = " LIST OF STUDENTS "
+chart.x_axis.title = " X AXIS "
 
 # set the title of the y-axis
-chart.y_axis.title = " EFFICIENCY "
+chart.y_axis.title = " Y AXIS "
 
 # add chart to the sheet
 # the top-left corner of a chart
-# is anchored to cell E2 .
+# is anchored to cell E2.
 sheet.add_chart(chart, "E2")
 
 # save the file
 wb.save("Datasheet_3.xlsx")
 
 
-'''
