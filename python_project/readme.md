@@ -1,3 +1,17 @@
+"""
+Description:This program takes a user input as a keyword and search the
+            occurrence of the word in the Excel file and assembles all
+            corresponding data from 5 sheets, and store these details in
+            a  Master Sheet.
+Author:  NITIN N SHETTY
+PS No:   99003746
+Contact: nitin.shetty1@ltts.com
+Date of Creation: 20/03/2021
+"""
+
+
+# "----------------------------- IMPORTING LIBRARIES --------------------------------"
+
 from openpyxl import load_workbook
 from openpyxl.chart import BarChart3D, Reference
 from openpyxl.chart import BarChart, Series, Reference
@@ -5,7 +19,9 @@ path ="Datasheet_3.xlsx"
 wb = load_workbook(path)
 
 
-#Function for Name
+# '''-------------------------------CREATION OF FIRST-CLASS FOR FOUR FUNCTIONS----------------'''
+
+# "---FUNCTION FOR FINDING MULTIPLE NAMES-----"
 
 class SingleData:
     data=[]
@@ -27,7 +43,9 @@ class SingleData:
             print('Given Name is not present in the list')
         data = all()
         return data
-    #Function for PS NUmber
+
+# "---FUNCTION FOR FINDING MULTIPLE PS-NO -----"
+
     def ps_no(self):
         ws = wb['Sheet1']
         data = []
@@ -42,8 +60,7 @@ class SingleData:
         data = all()
         return data
 
-
-    #Function for Email
+# "---FUNCTION FOR FINDING MULTIPLE EMAILS-----"
 
     def email(self):
         ws = wb['Sheet1']
@@ -59,10 +76,13 @@ class SingleData:
         data = all()
         return data
 
+# "------------------------------END OF FIRST CLASS----------------------------"
 
+# "-----------------------CREATION OF SECOND CLASS FOR ALL-DATA FUNCTION-----------" #
 class AllData:
 
-    #Function for ALL
+
+# "---------FUNCTION FOR FETCHING DETAILS OF SELECTED STUDENT----------------------"#
 
     def all(slef):
         data = []
@@ -99,13 +119,15 @@ class AllData:
 
 
 
+# -------------------CREATING OBJECT FOR CLASSES-----------------------#
 
-#Object Creation
+
 
 obj_single_data = SingleData()
 obj_all_data = AllData()
 
-#User Input
+
+# ------------------User Input----------------------#
 
 n=int(input("Which Data You have \n 1.Name \n 2.Ps number \n 3.Email \n 4.All \n"))
 
@@ -121,7 +143,7 @@ else:
     print('Data unavailable')
 
 
-##Creating Master Sheet
+# -----------------Creating Master Sheet-----------------#
 
 if 'Master_Sheet' not in wb.sheetnames:
 
@@ -161,8 +183,7 @@ else:
     wb.save(path)
 
 
-
-##Creating Chart
+# ------------------------------Creating graph-----------------------------#
 
 sheet = wb['Master_Sheet']
 
