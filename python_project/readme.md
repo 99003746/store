@@ -10,29 +10,29 @@ Date of Creation: 20/03/2021
 """
 
 
-# "----------------------------- IMPORTING LIBRARIES --------------------------------"
+# "---------- IMPORTING LIBRARIES -----------------"
 
 from openpyxl import load_workbook
 from openpyxl.chart import BarChart,  Reference
-path ="Datasheet_3.xlsx"
+path = "Datasheet_3.xlsx"
 wb = load_workbook(path)
 
 
-# '''-------------------------------CREATION OF FIRST-CLASS FOR FOUR FUNCTIONS----------------'''
+# '''------CREATION OF FIRST-CLASS FOR FOUR FUNCTIONS----'''
 
 # "---FUNCTION FOR FINDING MULTIPLE NAMES-----"
 
 class SingleData:
-    data=[]
+    data = []
 
     def name(self):
 
-        ws=wb['Sheet1']
+        ws = wb['Sheet1']
         data = []
         name = input("Enter a Name:- ")
 
         for i in range(1, ws.max_row+1):
-            if ws.cell(row=i, column=1).value == name:
+            if ws.cell(row=i, column=1).value==name:
                 data.append(ws.cell(row=i, column=2).value)
                 data.append(ws.cell(row=i, column=1).value)
                 data.append(ws.cell(row=i, column=3).value)
