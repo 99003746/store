@@ -196,7 +196,7 @@ chart.style = 15
 chart.add_data(values)
 
 # set the title of the chart
-chart.title = " BarChart "
+chart.title = " Student Marks Analysis "
 
 # set the title of the x-axis
 chart.x_axis.title = " MARKS "
